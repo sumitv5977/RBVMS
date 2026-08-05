@@ -2,9 +2,6 @@
 
 ---
 
-$$\boldsymbol{\rho} \left( \frac{\partial \boldsymbol{u}}{\partial t} + (\boldsymbol{u} \cdot \boldsymbol{\nabla})\boldsymbol{u} \right) = -\boldsymbol{\nabla} p + \boldsymbol{\nabla} \cdot \Big(2\mu \boldsymbol{\varepsilon}(\boldsymbol{u})\Big) + \boldsymbol{\rho} \boldsymbol{b}$$
-
-
 ## 1. Introduction
 
 The Residual-Based Variational Multiscale (RBVMS) method is derived from the governing equations of fluid mechanics. Therefore, the starting point is the strong form of the incompressible Navier–Stokes equations.
