@@ -32,13 +32,7 @@ $$\frac{d}{dt} \int_{\Omega} \rho\ d\Omega + \int_{\partial\Omega} \rho\mathbf{u
 
 Applying the divergence theorem,
 
-$$
-\frac{\partial\rho}{\partial t}
-+
-\nabla\cdot(\rho\mathbf{u})
-=
-0.
-$$
+$$\frac{\partial\rho}{\partial t} + \nabla\cdot(\rho\mathbf{u}) = 0. $$
 
 This is the continuity equation.
 
@@ -46,15 +40,11 @@ This is the continuity equation.
 
 For incompressible flow,
 
-$$
-\rho=\text{constant},
-$$
+$$\rho=\text{constant}, $$
 
 which gives
 
-$$
-\nabla\cdot\mathbf{u}=0.
-$$
+$$\nabla\cdot\mathbf{u}=0. $$
 
 This states that the velocity field is divergence free.
 
@@ -64,29 +54,11 @@ This states that the velocity field is divergence free.
 
 Newton's second law applied to a control volume gives
 
-$$
-\frac{d}{dt}
-\int_{\Omega}
-\rho\mathbf{u}\,d\Omega
-=
-\int_{\partial\Omega}
-\boldsymbol{\sigma}\mathbf{n}\,d\Gamma
-+
-\int_{\Omega}
-\mathbf{f}\,d\Omega.
-$$
+$$\frac{d}{dt} \int_{\Omega} \rho\mathbf{u}\,d\Omega = \int_{\partial\Omega} \boldsymbol{\sigma}\mathbf{n}\,d\Gamma + \int_{\Omega} \mathbf{f}\,d\Omega. $$
 
 Applying the divergence theorem,
 
-$$
-\frac{\partial(\rho\mathbf{u})}{\partial t}
-+
-\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})
-=
-\nabla\cdot\boldsymbol{\sigma}
-+
-\mathbf{f}.
-$$
+$$ \frac{\partial(\rho\mathbf{u})}{\partial t} + \nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u}) = \nabla\cdot\boldsymbol{\sigma} + \mathbf{f}. $$
 
 This is the conservative momentum equation.
 
@@ -96,13 +68,7 @@ This is the conservative momentum equation.
 
 The stress tensor is decomposed into pressure and viscous stress,
 
-$$
-\boldsymbol{\sigma}
-=
--p\mathbf{I}
-+
-\boldsymbol{\tau}.
-$$
+$$ \boldsymbol{\sigma} = -p\mathbf{I} + \boldsymbol{\tau}. $$
 
 where
 
@@ -116,36 +82,17 @@ where
 
 For a Newtonian fluid,
 
-$$
-\boldsymbol{\tau}
-=
-2\mu\boldsymbol{\varepsilon}(\mathbf{u}),
-$$
+$$ \boldsymbol{\tau} = 2\mu\boldsymbol{\varepsilon}(\mathbf{u}), $$
 
 where
 
-$$
-\boldsymbol{\varepsilon}(\mathbf{u})
-=
-\frac12
-\left(
-\nabla\mathbf{u}
-+
-\nabla\mathbf{u}^T
-\right)
-$$
+$$ \boldsymbol{\varepsilon}(\mathbf{u}) = \frac12 \left( \nabla\mathbf{u} + \nabla\mathbf{u}^T \right) $$
 
 is the strain-rate tensor.
 
 Therefore,
 
-$$
-\boldsymbol{\sigma}
-=
--p\mathbf{I}
-+
-2\mu\boldsymbol{\varepsilon}(\mathbf{u}).
-$$
+$$ \boldsymbol{\sigma} = -p\mathbf{I} + 2\mu\boldsymbol{\varepsilon}(\mathbf{u}). $$
 
 ---
 
@@ -153,26 +100,11 @@ $$
 
 Substituting the constitutive relation into the momentum equation yields
 
-$$
-\frac{\partial(\rho\mathbf{u})}{\partial t}
-+
-\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})
-=
--\nabla p
-+
-\nabla\cdot
-\left(
-2\mu\boldsymbol{\varepsilon}(\mathbf{u})
-\right)
-+
-\mathbf{f}.
-$$
+$$\frac{\partial(\rho\mathbf{u})}{\partial t} + \nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u}) = -\nabla p + \nabla\cdot\left(2\mu\boldsymbol{\varepsilon(\mathbf{u})\right) + \mathbf{f}. $$
 
 Together with
 
-$$
-\nabla\cdot\mathbf{u}=0,
-$$
+$$\nabla\cdot\mathbf{u}=0, $$
 
 these form the incompressible Navier–Stokes equations in conservative form.
 
@@ -182,39 +114,15 @@ these form the incompressible Navier–Stokes equations in conservative form.
 
 Using the tensor identity
 
-$$
-\nabla\cdot(\mathbf{u}\otimes\mathbf{u})
-=
-(\mathbf{u}\cdot\nabla)\mathbf{u}
-+
-(\nabla\cdot\mathbf{u})\mathbf{u},
-$$
+$$\nabla\cdot(\mathbf{u}\otimes\mathbf{u}) = (\mathbf{u}\cdot\nabla)\mathbf{u} + (\nabla\cdot\mathbf{u})\mathbf{u}, $$
 
 and the incompressibility constraint
 
-$$
-\nabla\cdot\mathbf{u}=0,
-$$
+$$\nabla\cdot\mathbf{u}=0, $$
 
 the momentum equation becomes
 
-$$
-\rho
-\left(
-\frac{\partial\mathbf{u}}{\partial t}
-+
-(\mathbf{u}\cdot\nabla)\mathbf{u}
-\right)
-=
--\nabla p
-+
-\nabla\cdot
-\left(
-2\mu\boldsymbol{\varepsilon}(\mathbf{u})
-\right)
-+
-\mathbf{f}.
-$$
+$$ \rho \left(\frac{\partial\mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u}\right) = -\nabla p + \nabla\cdot \left(2\mu\boldsymbol{\varepsilon (\mathbf{u}) \right) + \mathbf{f}. $$
 
 This is commonly called the **advective** or **non-conservative** form.
 
@@ -224,19 +132,13 @@ This is commonly called the **advective** or **non-conservative** form.
 
 For the continuous equations,
 
-$$
-\nabla\cdot\mathbf{u}=0,
-$$
+$$\nabla\cdot\mathbf{u}=0, $$
 
 so both formulations are mathematically equivalent.
 
 However, finite element approximations satisfy incompressibility only approximately,
 
-$$
-\nabla\cdot\mathbf{u}_h
-\neq
-0,
-$$
+$$ \nabla\cdot\mathbf{u}_h \neq 0, $$
 
 which means the two forms are no longer identical at the discrete level.
 
@@ -256,36 +158,18 @@ Later chapters discuss why many RBVMS formulations use the advective form, while
 
 The computational boundary is partitioned into
 
-$$
-\partial\Omega
-=
-\Gamma_D
-\cup
-\Gamma_N,
-$$
+$$ \partial\Omega = \Gamma_D \cup \Gamma_N, $$
 
 where
 
-$$
-\Gamma_D
-\cap
-\Gamma_N
-=
-\varnothing.
-$$
+$$\Gamma_D \cap \Gamma_N = \varnothing. $$
 
 ## Dirichlet Boundary Conditions
 
 Velocity is prescribed,
 
 $$
-\mathbf{u}
-=
-\bar{\mathbf{u}}
-\qquad
-\text{on }
-\Gamma_D.
-$$
+\mathbf{u} = \bar{\mathbf{u}} \qquad \text{on } \Gamma_D. $$
 
 Typical examples include
 
@@ -297,14 +181,7 @@ Typical examples include
 
 Traction is prescribed,
 
-$$
-\boldsymbol{\sigma}\mathbf{n}
-=
-\bar{\mathbf{t}}
-\qquad
-\text{on }
-\Gamma_N.
-$$
+$$\boldsymbol{\sigma}\mathbf{n} = \bar{\mathbf{t}} \qquad \text{on } \Gamma_N. $$
 
 Typical examples include
 
@@ -318,11 +195,7 @@ Typical examples include
 
 Transient simulations require
 
-$$
-\mathbf{u}(\mathbf{x},0)
-=
-\mathbf{u}_0(\mathbf{x}).
-$$
+$$ \mathbf{u}(\mathbf{x},0) = \mathbf{u}_0(\mathbf{x}). $$
 
 Pressure is typically initialized consistently with the momentum equations.
 
