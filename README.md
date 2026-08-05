@@ -37,7 +37,7 @@ The long-term goal is to serve as the theoretical foundation for a research-grad
 # Repository Structure
 
 ```
-RBVMS-Notes/
+RBVMS/
 
 README.md
 
