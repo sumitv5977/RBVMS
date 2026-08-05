@@ -1,6 +1,9 @@
 # Chapter 1 — Governing Equations of Incompressible Flow
 
 ---
+$$
+\boldsymbol{\rho \left( \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} \right) = -\nabla p + \nabla \cdot \left( 2 \mu \boldsymbol{\varepsilon}(\mathbf{u}) \right) + \rho \mathbf{b}}
+$$
 
 ## 1. Introduction
 
