@@ -28,16 +28,7 @@ For incompressible isothermal flows, only the first two are required.
 
 For an arbitrary control volume $\Omega$, conservation of mass is
 
-$$
-\frac{d}{dt}
-\int_{\Omega}
-\rho\,d\Omega
-+
-\int_{\partial\Omega}
-\rho\mathbf{u}\cdot\mathbf{n}\,d\Gamma
-=
-0.
-$$
+$$\frac{d}{dt} \int_{\Omega} \rho\,d\Omega + \int_{\partial\Omega} \rho\mathbf{u}\cdot\mathbf{n}\,d\Gamma = 0. $$
 
 Applying the divergence theorem,
 
