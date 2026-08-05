@@ -1,244 +1,262 @@
-# Chapter 1 — Governing Equations
+# Chapter 1 — Governing Equations of Incompressible Flow
 
 ---
 
-# Objective
+## 1. Introduction
 
-This chapter introduces the governing equations of incompressible fluid flow that form the basis of the Residual-Based Variational Multiscale (RBVMS) method.
+The Residual-Based Variational Multiscale (RBVMS) method is derived from the governing equations of fluid mechanics. Therefore, the starting point is the strong form of the incompressible Navier–Stokes equations.
 
-The presentation begins with the conservation laws of continuum mechanics and derives the incompressible Navier–Stokes equations in both conservative and non-conservative forms. The relationship between these formulations is established, along with the constitutive equation for a Newtonian fluid and the associated boundary conditions.
-
-These equations constitute the **strong form** of the problem. All subsequent chapters derive the weak formulation, finite element discretization, and RBVMS stabilization directly from this mathematical model.
-
----
-
-# 1. Conservation Laws
-
-Fluid motion is governed by three fundamental conservation principles:
+The governing equations arise from the fundamental conservation principles:
 
 1. Conservation of mass
 2. Conservation of linear momentum
-3. Conservation of energy
 
-For incompressible isothermal flows, only the first two are required.
+For incompressible, Newtonian, isothermal flows, these equations provide the mathematical foundation for the variational formulation developed in later chapters.
 
 ---
 
 # 2. Conservation of Mass
 
-For an arbitrary control volume $\Omega$, conservation of mass is
+Consider an arbitrary control volume $\Omega$ with boundary $\partial\Omega$.
 
-$$\frac{d}{dt} \int_{\Omega} \rho\ d\Omega + \int_{\partial\Omega} \rho\mathbf{u}\cdot\mathbf{n}\ d\Gamma = 0. $$
+The conservation of mass states that the rate of change of mass inside the control volume equals the net mass flux through its boundary.
 
-Applying the divergence theorem,
+The integral form is:
 
-$$\frac{\partial\rho}{\partial t} + \nabla\cdot(\rho\mathbf{u}) = 0. $$
+$$\frac{d}{dt}\int_{\Omega}\rho\,d\Omega+\int_{\partial\Omega}\rho\mathbf{u}\cdot\mathbf{n}\,d\Gamma=0$$
 
-This is the continuity equation.
+where:
 
-## Constant Density
+- $\rho$ is the density,
+- $\mathbf{u}$ is the velocity field,
+- $\mathbf{n}$ is the outward unit normal vector.
 
-For incompressible flow,
+Using the divergence theorem:
 
-$$\rho=\text{constant}, $$
+$$\int_{\partial\Omega}\rho\mathbf{u}\cdot\mathbf{n}\,d\Gamma=\int_{\Omega}\nabla\cdot(\rho\mathbf{u})\,d\Omega$$
 
-which gives
+Therefore:
 
-$$\nabla\cdot\mathbf{u}=0. $$
+$$\int_{\Omega}\left(\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{u})\right)d\Omega=0$$
 
-This states that the velocity field is divergence free.
+Since the control volume is arbitrary:
+
+$$\boxed{\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{u})=0}$$
+
+This is the differential form of the continuity equation.
 
 ---
 
-# 3. Conservation of Linear Momentum
+# 3. Incompressibility Constraint
 
-Newton's second law applied to a control volume gives
+For an incompressible fluid:
 
-$$\frac{d}{dt} \int_{\Omega} \rho\mathbf{u}\,d\Omega = \int_{\partial\Omega} \boldsymbol{\sigma}\mathbf{n}\,d\Gamma + \int_{\Omega} \mathbf{f}\,d\Omega. $$
+$$\rho=\text{constant}$$
 
-Applying the divergence theorem,
+Therefore:
 
-$$ \frac{\partial(\rho\mathbf{u})}{\partial t} + \nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u}) = \nabla\cdot\boldsymbol{\sigma} + \mathbf{f}. $$
+$$\frac{\partial\rho}{\partial t}=0$$
+
+and
+
+$$\nabla\cdot(\rho\mathbf{u})=\rho\nabla\cdot\mathbf{u}$$
+
+Since density is non-zero:
+
+$$\boxed{\nabla\cdot\mathbf{u}=0}$$
+
+This is the incompressibility constraint.
+
+---
+
+# 4. Conservation of Linear Momentum
+
+Newton's second law applied to a fluid control volume gives:
+
+$$\frac{d}{dt}\int_{\Omega}\rho\mathbf{u}\,d\Omega=\int_{\partial\Omega}\boldsymbol{\sigma}\mathbf{n}\,d\Gamma+\int_{\Omega}\rho\mathbf{b}\,d\Omega$$
+
+where:
+
+- $\boldsymbol{\sigma}$ is the Cauchy stress tensor,
+- $\mathbf{b}$ is the body force per unit mass.
+
+Using the divergence theorem:
+
+$$\int_{\partial\Omega}\boldsymbol{\sigma}\mathbf{n}\,d\Gamma=\int_{\Omega}\nabla\cdot\boldsymbol{\sigma}\,d\Omega$$
+
+Therefore:
+
+$$\int_{\Omega}\left[\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})-\nabla\cdot\boldsymbol{\sigma}-\rho\mathbf{b}\right]d\Omega=0$$
+
+Since the domain is arbitrary:
+
+$$\boxed{\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})=\nabla\cdot\boldsymbol{\sigma}+\rho\mathbf{b}}$$
 
 This is the conservative momentum equation.
 
 ---
 
-# 4. Cauchy Stress Tensor
+# 5. Cauchy Stress Tensor
 
-The stress tensor is decomposed into pressure and viscous stress,
+The stress tensor is decomposed into pressure and viscous components:
 
-$$ \boldsymbol{\sigma} = -p\mathbf{I} + \boldsymbol{\tau}. $$
+$$\boldsymbol{\sigma}=-p\mathbf{I}+\boldsymbol{\tau}$$
 
-where
+where:
 
-- $p$ is the thermodynamic pressure,
+- $p$ is pressure,
 - $\mathbf{I}$ is the identity tensor,
 - $\boldsymbol{\tau}$ is the viscous stress tensor.
 
 ---
 
-# 5. Newtonian Constitutive Law
+# 6. Newtonian Constitutive Relation
 
-For a Newtonian fluid,
+For a Newtonian fluid, the viscous stress tensor is proportional to the strain-rate tensor.
 
-$$ \boldsymbol{\tau} = 2\mu\boldsymbol{\varepsilon}(\mathbf{u}), $$
+The strain-rate tensor is:
 
-where
+$$\boldsymbol{\varepsilon}(\mathbf{u})=\frac{1}{2}(\nabla\mathbf{u}+\nabla\mathbf{u}^{T})$$
 
-$$ \boldsymbol{\varepsilon}(\mathbf{u}) = \frac12 \left( \nabla\mathbf{u} + \nabla\mathbf{u}^T \right) $$
+The constitutive equation is:
 
-is the strain-rate tensor.
+$$\boldsymbol{\tau}=2\mu\boldsymbol{\varepsilon}(\mathbf{u})$$
 
-Therefore,
+where $\mu$ is the dynamic viscosity.
 
-$$ \boldsymbol{\sigma} = -p\mathbf{I} + 2\mu\boldsymbol{\varepsilon}(\mathbf{u}). $$
+Therefore:
 
----
-
-# 6. Conservative Navier–Stokes Equations
-
-Substituting the constitutive relation into the momentum equation yields
-
-$$\frac{\partial(\rho\mathbf{u})}{\partial t} + \nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u}) = -\nabla p + \nabla\cdot\left(2\mu\boldsymbol{\varepsilon(\mathbf{u})\right) + \mathbf{f}. $$
-
-Together with
-
-$$\nabla\cdot\mathbf{u}=0, $$
-
-these form the incompressible Navier–Stokes equations in conservative form.
+$$\boldsymbol{\sigma}=-p\mathbf{I}+2\mu\boldsymbol{\varepsilon}(\mathbf{u})$$
 
 ---
 
-# 7. Non-Conservative (Advective) Form
+# 7. Conservative Form of Navier–Stokes Equations
 
-Using the tensor identity
+Substituting the constitutive relation into the momentum equation gives:
 
-$$\nabla\cdot(\mathbf{u}\otimes\mathbf{u}) = (\mathbf{u}\cdot\nabla)\mathbf{u} + (\nabla\cdot\mathbf{u})\mathbf{u}, $$
+$$\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}$$
 
-and the incompressibility constraint
+Together with:
 
-$$\nabla\cdot\mathbf{u}=0, $$
+$$\nabla\cdot\mathbf{u}=0$$
 
-the momentum equation becomes
+the incompressible Navier–Stokes equations in conservative form are:
 
-$$ \rho \left(\frac{\partial\mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u}\right) = -\nabla p + \nabla\cdot \left(2\mu\boldsymbol{\varepsilon (\mathbf{u}) \right) + \mathbf{f}. $$
-
-This is commonly called the **advective** or **non-conservative** form.
+$$\boxed{\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})+\nabla p-\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))-\rho\mathbf{b}=0}$$
 
 ---
 
-# 8. Conservative vs. Non-Conservative Forms
+# 8. Non-Conservative Form
 
-For the continuous equations,
+The convective term can be expanded using:
 
-$$\nabla\cdot\mathbf{u}=0, $$
+$$\nabla\cdot(\mathbf{u}\otimes\mathbf{u})=(\mathbf{u}\cdot\nabla)\mathbf{u}+(\nabla\cdot\mathbf{u})\mathbf{u}$$
 
-so both formulations are mathematically equivalent.
+For incompressible flow:
 
-However, finite element approximations satisfy incompressibility only approximately,
+$$\nabla\cdot\mathbf{u}=0$$
 
-$$ \nabla\cdot\mathbf{u}_h \neq 0, $$
+Therefore:
 
-which means the two forms are no longer identical at the discrete level.
+$$\nabla\cdot(\mathbf{u}\otimes\mathbf{u})=(\mathbf{u}\cdot\nabla)\mathbf{u}$$
 
-This affects
+The momentum equation becomes:
 
-- momentum conservation,
-- kinetic-energy conservation,
-- nonlinear linearization,
-- stabilization,
-- and numerical robustness.
+$$\boxed{\rho\left(\frac{\partial\mathbf{u}}{\partial t}+(\mathbf{u}\cdot\nabla)\mathbf{u}\right)=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}}$$
 
-Later chapters discuss why many RBVMS formulations use the advective form, while conservative and skew-symmetric formulations are often preferred for improved conservation properties.
+This is called the advective or non-conservative form.
 
 ---
 
-# 9. Boundary Conditions
+# 9. Conservative Versus Non-Conservative Form
 
-The computational boundary is partitioned into
+At the continuous level, the conservative and non-conservative forms are equivalent when:
 
-$$ \partial\Omega = \Gamma_D \cup \Gamma_N, $$
+$$\nabla\cdot\mathbf{u}=0$$
 
-where
+is satisfied exactly.
 
-$$\Gamma_D \cap \Gamma_N = \varnothing. $$
+However, finite element approximations generally satisfy:
 
-## Dirichlet Boundary Conditions
+$$\nabla\cdot\mathbf{u}_h\neq0$$
 
-Velocity is prescribed,
+Therefore, after discretization, the two formulations may have different numerical properties.
 
-$$
-\mathbf{u} = \bar{\mathbf{u}} \qquad \text{on } \Gamma_D. $$
+The differences influence:
 
-Typical examples include
+- conservation properties,
+- kinetic energy behavior,
+- stability,
+- nonlinear convergence.
 
-- inflow velocity,
+This distinction becomes important for turbulence models and stabilized methods such as RBVMS.
+
+---
+
+# 10. Boundary Conditions
+
+The boundary is divided into:
+
+$$\partial\Omega=\Gamma_D\cup\Gamma_N$$
+
+where:
+
+$$\Gamma_D\cap\Gamma_N=\emptyset$$
+
+---
+
+## 10.1 Dirichlet Boundary Condition
+
+Velocity is prescribed:
+
+$$\mathbf{u}=\bar{\mathbf{u}}\qquad\text{on }\Gamma_D$$
+
+Examples:
+
+- inlet velocity,
 - no-slip walls,
-- moving walls.
-
-## Neumann Boundary Conditions
-
-Traction is prescribed,
-
-$$\boldsymbol{\sigma}\mathbf{n} = \bar{\mathbf{t}} \qquad \text{on } \Gamma_N. $$
-
-Typical examples include
-
-- outlet pressure,
-- imposed surface traction,
-- stress boundary conditions.
+- moving boundaries.
 
 ---
 
-# 10. Initial Conditions
+## 10.2 Neumann Boundary Condition
 
-Transient simulations require
+Traction is prescribed:
 
-$$ \mathbf{u}(\mathbf{x},0) = \mathbf{u}_0(\mathbf{x}). $$
-
-Pressure is typically initialized consistently with the momentum equations.
+$$\boldsymbol{\sigma}\mathbf{n}=\bar{\mathbf{t}}\qquad\text{on }\Gamma_N$$
 
 ---
 
-# 11. Summary
+# 11. Initial Condition
 
-The incompressible Navier–Stokes equations consist of
+For transient problems:
 
-- continuity,
-- momentum,
-- constitutive law,
-- boundary conditions,
-- initial conditions.
-
-These equations define the **strong form** of the problem.
-
-All finite element formulations—including RBVMS—begin with these governing equations.
+$$\mathbf{u}(\mathbf{x},0)=\mathbf{u}_0(\mathbf{x})$$
 
 ---
 
-# C++ Mapping
+# 12. Summary
 
-| Mathematical Quantity | C++ Representation |
-|-----------------------|--------------------|
-| Velocity $\mathbf{u}$ | `Eigen::VectorXd velocity` |
-| Pressure $p$ | `Eigen::VectorXd pressure` |
-| Density $\rho$ | `Material::density()` |
-| Dynamic viscosity $\mu$ | `Material::viscosity()` |
-| Body force $\mathbf{f}$ | `BodyForce` |
-| Stress tensor $\boldsymbol{\sigma}$ | `computeStress()` |
+The strong form of the incompressible Navier–Stokes equations is:
 
----
+Momentum equation:
 
-# Key Takeaways
+$$\rho\left(\frac{\partial\mathbf{u}}{\partial t}+(\mathbf{u}\cdot\nabla)\mathbf{u}\right)=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}$$
 
-- The Navier–Stokes equations are the starting point for RBVMS.
-- Conservative and non-conservative forms are equivalent only for exactly divergence-free velocity fields.
-- The finite element method begins from the strong form and derives a weak (variational) formulation.
-- The next chapter introduces weighted residuals and the variational formulation that underpins both classical Galerkin FEM and RBVMS.
+Continuity equation:
+
+$$\nabla\cdot\mathbf{u}=0$$
+
+These equations provide the starting point for the weak formulation and the subsequent RBVMS derivation.
 
 ---
 
-## Next Chapter
+# References
 
-➡ **Chapter 2 — Variational Formulation**
+1. R. Temam, *Navier–Stokes Equations: Theory and Numerical Analysis*.
+
+2. P. G. Ciarlet, *The Finite Element Method for Elliptic Problems*.
+
+3. T. J. R. Hughes, *The Finite Element Method: Linear Static and Dynamic Finite Element Analysis*.
+
+4. R. Codina, "Stabilization of incompressibility and convection through orthogonal sub-scales in finite element methods."
