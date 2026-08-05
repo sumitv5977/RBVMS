@@ -41,9 +41,9 @@ $$\int_{\Omega}\left(\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{u})
 
 Since the control volume is arbitrary:
 
-$$\boxed{\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{u})=0}$$
+**Continuity equation:**
 
-This is the differential form of the continuity equation.
+$$\boxed{\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{u})=0}$$
 
 ---
 
@@ -63,9 +63,9 @@ $$\nabla\cdot(\rho\mathbf{u})=\rho\nabla\cdot\mathbf{u}$$
 
 Since density is non-zero:
 
-$$\boxed{\nabla\cdot\mathbf{u}=0}$$
+**Incompressibility constraint:**
 
-This is the incompressibility constraint.
+$$\boxed{\nabla\cdot\mathbf{u}=0}$$
 
 ---
 
@@ -90,9 +90,9 @@ $$\int_{\Omega}\left[\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rh
 
 Since the domain is arbitrary:
 
-$$\boxed{\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})=\nabla\cdot\boldsymbol{\sigma}+\rho\mathbf{b}}$$
+**Conservative momentum equation:**
 
-This is the conservative momentum equation.
+$$\boxed{\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})=\nabla\cdot\boldsymbol{\sigma}+\rho\mathbf{b}}$$
 
 ---
 
@@ -126,7 +126,7 @@ where $\mu$ is the dynamic viscosity.
 
 Therefore:
 
-$$\boldsymbol{\sigma}=-p\mathbf{I}+2\mu\boldsymbol{\varepsilon}(\mathbf{u})$$
+$$\boxed{\boldsymbol{\sigma}=-p\mathbf{I}+2\mu\boldsymbol{\varepsilon}(\mathbf{u})}$$
 
 ---
 
@@ -134,15 +134,15 @@ $$\boldsymbol{\sigma}=-p\mathbf{I}+2\mu\boldsymbol{\varepsilon}(\mathbf{u})$$
 
 Substituting the constitutive relation into the momentum equation gives:
 
-$$\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}$$
+**Conservative Navier–Stokes momentum equation:**
+
+$$\boxed{\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}}$$
 
 Together with:
 
-$$\nabla\cdot\mathbf{u}=0$$
+$$\boxed{\nabla\cdot\mathbf{u}=0}$$
 
-the incompressible Navier–Stokes equations in conservative form are:
-
-$$\boxed{\frac{\partial(\rho\mathbf{u})}{\partial t}+\nabla\cdot(\rho\mathbf{u}\otimes\mathbf{u})+\nabla p-\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))-\rho\mathbf{b}=0}$$
+these equations define incompressible flow.
 
 ---
 
@@ -162,9 +162,9 @@ $$\nabla\cdot(\mathbf{u}\otimes\mathbf{u})=(\mathbf{u}\cdot\nabla)\mathbf{u}$$
 
 The momentum equation becomes:
 
-$$\boxed{\rho\left(\frac{\partial\mathbf{u}}{\partial t}+(\mathbf{u}\cdot\nabla)\mathbf{u}\right)=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}}$$
+**Advective form of the momentum equation:**
 
-This is called the advective or non-conservative form.
+$$\boxed{\rho\left(\frac{\partial\mathbf{u}}{\partial t}+(\mathbf{u}\cdot\nabla)\mathbf{u}\right)=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}}$$
 
 ---
 
@@ -180,22 +180,20 @@ However, finite element approximations generally satisfy:
 
 $$\nabla\cdot\mathbf{u}_h\neq0$$
 
-Therefore, after discretization, the two formulations may have different numerical properties.
+Therefore, after discretization, the two formulations may have different numerical properties:
 
-The differences influence:
-
-- conservation properties,
-- kinetic energy behavior,
+- conservation behavior,
+- kinetic-energy behavior,
 - stability,
 - nonlinear convergence.
 
-This distinction becomes important for turbulence models and stabilized methods such as RBVMS.
+This distinction becomes important in turbulence modeling and stabilized formulations such as RBVMS.
 
 ---
 
 # 10. Boundary Conditions
 
-The boundary is divided into:
+The computational boundary is divided into:
 
 $$\partial\Omega=\Gamma_D\cup\Gamma_N$$
 
@@ -209,13 +207,13 @@ $$\Gamma_D\cap\Gamma_N=\emptyset$$
 
 Velocity is prescribed:
 
-$$\mathbf{u}=\bar{\mathbf{u}}\qquad\text{on }\Gamma_D$$
+$$\boxed{\mathbf{u}=\bar{\mathbf{u}}\quad\text{on }\Gamma_D}$$
 
 Examples:
 
 - inlet velocity,
-- no-slip walls,
-- moving boundaries.
+- no-slip wall,
+- moving boundary.
 
 ---
 
@@ -223,7 +221,7 @@ Examples:
 
 Traction is prescribed:
 
-$$\boldsymbol{\sigma}\mathbf{n}=\bar{\mathbf{t}}\qquad\text{on }\Gamma_N$$
+$$\boxed{\boldsymbol{\sigma}\mathbf{n}=\bar{\mathbf{t}}\quad\text{on }\Gamma_N}$$
 
 ---
 
@@ -231,23 +229,23 @@ $$\boldsymbol{\sigma}\mathbf{n}=\bar{\mathbf{t}}\qquad\text{on }\Gamma_N$$
 
 For transient problems:
 
-$$\mathbf{u}(\mathbf{x},0)=\mathbf{u}_0(\mathbf{x})$$
+$$\boxed{\mathbf{u}(\mathbf{x},0)=\mathbf{u}_0(\mathbf{x})}$$
 
 ---
 
 # 12. Summary
 
-The strong form of the incompressible Navier–Stokes equations is:
+The strong form of the incompressible Navier–Stokes equations consists of:
 
-Momentum equation:
+**Momentum equation:**
 
-$$\rho\left(\frac{\partial\mathbf{u}}{\partial t}+(\mathbf{u}\cdot\nabla)\mathbf{u}\right)=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}$$
+$$\boxed{\rho\left(\frac{\partial\mathbf{u}}{\partial t}+(\mathbf{u}\cdot\nabla)\mathbf{u}\right)=-\nabla p+\nabla\cdot(2\mu\boldsymbol{\varepsilon}(\mathbf{u}))+\rho\mathbf{b}}$$
 
-Continuity equation:
+**Continuity equation:**
 
-$$\nabla\cdot\mathbf{u}=0$$
+$$\boxed{\nabla\cdot\mathbf{u}=0}$$
 
-These equations provide the starting point for the weak formulation and the subsequent RBVMS derivation.
+These equations provide the starting point for the weak formulation and the RBVMS derivation.
 
 ---
 
