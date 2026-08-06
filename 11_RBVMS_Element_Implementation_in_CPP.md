@@ -289,13 +289,7 @@ Eigen::VectorXd uPrime;
 
 The update equation is:
 
-$$
-\boxed{
-\mathbf{u}'^{n+1}
-=
-\frac{
-\mathbf{u}'^n
--
+$$\boxed{\mathbf{u}'^{n+1} = \frac{\mathbf{u}'^n -
 \frac{\Delta t}{\rho}\mathbf{R}_m
 }
 {
