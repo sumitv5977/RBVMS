@@ -398,9 +398,7 @@ return Re;
 
 For nonlinear Navier–Stokes:
 
-$$
-\mathbf{J}
-=
+$$\mathbf{J} =
 \frac{\partial\mathbf{R}}
 {\partial\mathbf{U}}
 $$
@@ -408,10 +406,7 @@ $$
 
 The Newton iteration is:
 
-$$
-\boxed{
-\mathbf{J}\Delta\mathbf{U}
-=
+$$\boxed{\mathbf{J}\Delta\mathbf{U} =
 -\mathbf{R}
 }
 $$
