@@ -1,7 +1,5 @@
 # Residual-Based Variational Multiscale (RBVMS) Methods
 
-*A graduate-level set of notes on the mathematical formulation, finite element implementation, and C++ development of Residual-Based Variational Multiscale (RBVMS) methods for incompressible flow.*
-
 ---
 
 ## Overview
