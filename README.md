@@ -1,7 +1,5 @@
 # Residual-Based Variational Multiscale (RBVMS) Methods
 
----
-
 ## Overview
 
 These notes document the complete derivation and implementation of the **Residual-Based Variational Multiscale (RBVMS)** method for incompressible Navier–Stokes equations using the Finite Element Method (FEM).
